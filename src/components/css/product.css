@@ -1,0 +1,29 @@
+.card {
+    width: 20%;
+    height: 15rem;
+    border: 2px solid red;
+    margin: 1.2rem;
+    padding: 0.2rem;
+    transition: 0.3s;
+    text-align: center;
+  }
+  .card:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  .card img {
+  margin-bottom: .5rem;
+  }
+  
+  #container {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+  
+    flex-wrap: wrap;
+  }
+  
+  #productsSelector {
+    width: 40%;
+    height: 2rem;
+  }
