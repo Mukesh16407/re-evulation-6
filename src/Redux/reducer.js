@@ -1,12 +1,18 @@
-import {GET_PRODUCT_REQ,GET_PRODUCT_SUCESS,GET_PRODUCT_FAILURE,SORT_DATA,
-    GET_CLICKED_DATA_FAILURE,GET_CLICKED_DATA_REQ,GET_CLICKED_DATA_SUCCESS,
-    } from './actionTypes';
+import {GET_PRODUCT_REQ,
+  GET_PRODUCT_SUCESS,
+  GET_PRODUCT_FAILURE,
+   SORT_DATA,
+   GET_CLICKED_PRODUCT_REQ,
+   GET_CLICKED_PRODUCT_SUCCESS,
+   GET_CLICKED_PRODUCT_FAILURE,
+} from './actionTypes';
 
 const initState = {
     products:[],
     isLoading:false,
     isError:false,
-    sortProduct:[]
+    sortProduct:[],
+    clickedProd: [],
 }
 
 export const Reducer = (state = initState, {type,payload})=>{
@@ -25,32 +31,24 @@ export const Reducer = (state = initState, {type,payload})=>{
         case SORT_DATA:
             if (payload == "--sort by --")
         return {
-          ...state,
-          sortProduct: [...state.products],
+          ...state, sortProduct: [...state.products],
         };
       else if (payload == "asc")
         return {
-          ...state,
-          sortProduct: [...state.sortProduct.sort((a, b) => a.price - b.price)],
+          ...state,sortProduct: [...state.sortProduct.sort((a, b) => a.price - b.price)],
         };
       else if (payload == "desc")
         return {
           ...state,
           sortProduct: [...state.sortProduct.sort((a, b) => b.price - a.price)],
         };
-        case GET_CLICKED_DATA_REQ:
-      return {
-        ...state,
-        isLoading: true,
+        case GET_CLICKED_PRODUCT_REQ:
+      return {...state,isLoading: true,
       };
-    case GET_CLICKED_DATA_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        clickedProd: payload,
-        isError: false,
+    case GET_CLICKED_PRODUCT_SUCCESS:
+      return {...state,isLoading: false,clickedProd: payload,isError: false,
       };
-    case GET_CLICKED_DATA_FAILURE:
+    case GET_CLICKED_PRODUCT_FAILURE:
       return {
         ...state,
         isLoading: false,

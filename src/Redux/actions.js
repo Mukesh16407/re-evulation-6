@@ -1,7 +1,12 @@
 // action for get products request
 import axios from 'axios'
-import {GET_PRODUCT_REQ,GET_PRODUCT_SUCESS,GET_PRODUCT_FAILURE,SORT_DATA,
-    GET_CLICKED_DATA_FAILURE,GET_CLICKED_DATA_REQ,GET_CLICKED_DATA_SUCCESS,
+import {GET_PRODUCT_REQ,
+       GET_PRODUCT_SUCESS,
+       GET_PRODUCT_FAILURE,
+        SORT_DATA,
+        GET_CLICKED_PRODUCT_REQ,
+        GET_CLICKED_PRODUCT_SUCCESS,
+        GET_CLICKED_PRODUCT_FAILURE,
     } from './actionTypes';
 
 import {useDispatch} from  'react-redux';
@@ -25,16 +30,19 @@ export const getProductsFailure = () => ({
 
 // thunk call to fetch products  list
 export const getproductsData = () => {
-   return(dispatch) =>{
-       dispatch(getProductsReq());
-       axios.get("https://movie-fake-server.herokuapp.com/products")
-       .then((res) =>{
-           dispatch(getProductsSuccess(res.products))
-       })
-       .catch(() =>{
-           dispatch(getProductsFailure())
-       })
-   }
+  return (dispatch) => {
+    dispatch(getProductsReq());
+    axios
+      .get("https://movie-fake-server.herokuapp.com/products")
+      .then((res) => {
+        // console.log(res.data);
+        dispatch(getProductsSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(getProductsFailure());
+        console.log(err);
+      });
+  };
 };
 
 // action object for sort  feature
@@ -45,20 +53,20 @@ export const sortProducts = (payload) => ({
 });
 
 export const getClickedProductsReq = () => ({
-    type: GET_CLICKED_DATA_REQ,
+    type: GET_CLICKED_PRODUCT_REQ,
   });
   
   // action for get products success
   
   export const getClickedProductsSuccess = (payload) => ({
-    type: GET_CLICKED_DATA_SUCCESS,
+    type: GET_CLICKED_PRODUCT_SUCCESS,
     payload,
   });
   
   // action for get products failure
   
   export const getClickedProductsFailure = () => ({
-    type: GET_CLICKED_DATA_FAILURE,
+    type: GET_CLICKED_PRODUCT_FAILURE,
   });
   
   // thunk call to fetch products  list
@@ -76,4 +84,5 @@ export const getClickedProductsReq = () => ({
           console.log(err);
         });
     };
+      
   };

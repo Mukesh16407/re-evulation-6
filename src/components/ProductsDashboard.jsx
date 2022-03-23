@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 import {getproductsData,sortProducts} from '../Redux/actions';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styles from "./css/product.css";
+import styles from "./css/product.module.css";
+
 export const Products = () => {
   // to get all products list on component mounts
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const data = useSelector((state) => state.sortProducts)
+  const data = useSelector((state) => state.products);
+ 
   useEffect(() => {
     //   dispatch an action to the store
     // dont make call here
@@ -38,10 +40,12 @@ export const Products = () => {
               <div
                 className={styles.card}
                 key={el.id}
-                onClick={() => nav(`/products/${el.id}`)}
+                onClick={() => navigate(`/products/${el.id}`)}
               >
-                <img src={el.image} alt="" height="80%" width="100%" />
-                {/* display the results here */ el.title}
+                <img src={el.image} alt="" height="85%" width="100%" />
+                {/* display the results here */
+                
+                  el.title}
               </div>
             );
           })}

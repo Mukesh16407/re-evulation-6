@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-import styles from './css/navbar.css'
+import styles from "./css/navbar.module.css";
 const links = [
   {
     title: "Home",
@@ -18,12 +18,16 @@ const links = [
 export const Navbar = () => {
   return (
     //map through the link ad display it in header
-    <ul className={styles.navbar}>
-      {links.map((el,index) => (
-        <Link to={el.link} key={index}>
-          <li>{el.title}</li>
-        </Link>
-      ))}
-    </ul>
+    <div className={styles.navbar}>
+      <ul>
+        {links.map((el, index) => {
+          return (
+            <Link key={index} to={el.link}>
+              <li id={el.id}>{el.title}</li>
+            </Link>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
